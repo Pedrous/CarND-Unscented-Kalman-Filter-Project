@@ -24,10 +24,10 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 0.3; //30;
+  std_a_ = 1; //30;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 0.03; //30;
+  std_yawdd_ = 1; //30;
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
@@ -83,10 +83,7 @@ UKF::UKF() {
 
 UKF::~UKF() {}
 
-/**
- * @param {MeasurementPackage} meas_package The latest measurement data of
- * either radar or laser.
- */
+
 void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   /**
   TODO:
@@ -158,11 +155,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   cout << "P_ = " << P_ << endl;
 }
 
-/**
- * Predicts sigma points, the state, and the state covariance matrix.
- * @param {double} delta_t the change in time (in seconds) between the last
- * measurement and this one.
- */
+
 void UKF::Prediction(double delta_t) {
   //create augmented mean vector
   VectorXd x_aug = VectorXd(7);
@@ -253,10 +246,7 @@ void UKF::Prediction(double delta_t) {
   }
 }
 
-/**
- * Updates the state and the state covariance matrix using a laser measurement.
- * @param {MeasurementPackage} meas_package
- */
+
 void UKF::UpdateLidar(MeasurementPackage meas_package) {
   //set measurement dimension, lidar can measure px and py
   int n_z = 2;
